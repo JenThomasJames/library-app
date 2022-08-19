@@ -21,7 +21,8 @@ public class LibraryApplication {
 		char menuChoice = 'y';
 		do {
 			System.out.println("************************");
-			System.out.println("\n1)Add New Student\n2)Add New Book\n3)Add New Batch\n4)Student Data\n5)Book Data\n");
+			System.out
+					.println("\n1)Add New Student\n2)Add New Book\n3)Add New Programme\n4)Student Data\n5)Book Data\n");
 			System.out.println("************************");
 			System.out.println("\nYour Choice? : ");
 			choice = scan.nextInt();
@@ -85,10 +86,29 @@ public class LibraryApplication {
 		String title = scan.nextLine();
 		System.out.println("How long is the programme?: ");
 		int numberOfYears = scan.nextInt();
-		System.out.println("What is the strength of the programme?: ");
-		int strength = scan.nextInt();
-		Programme programme = new Programme(programmeId, title, numberOfYears, strength);
+		System.out.println("How many specializations does this programme have?: ");
+		int numberOfSpecializations = scan.nextInt();
+		scan.nextLine();
+		String specializations = getSpecializations(numberOfSpecializations);
+		Programme programme = new Programme(programmeId, title, numberOfYears, 60, specializations);
 		return programme;
+	}
+
+	/**
+	 * @Author Jen Thomas James Gets the specializations for the given programme
+	 */
+	private String getSpecializations(int numberOfSpecializations) {
+		String specializations = "[";
+		for (int i = 0; i < numberOfSpecializations; i++) {
+			System.out.println("Name of specialization " + (i + 1));
+			String specialization = scan.nextLine();
+			specializations += "" + specialization;
+			if (i != numberOfSpecializations - 1) {
+				specializations += ", ";
+			}
+		}
+		specializations += "]";
+		return specializations;
 	}
 
 	/**

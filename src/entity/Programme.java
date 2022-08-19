@@ -9,24 +9,26 @@ public class Programme {
 	private String title;
 	private int numberOfYears;
 	private int totalStrength;
+	private String specialization;
 
 	public Programme() {
 		super();
 	}
 
-	public Programme(long batchId, String title, int numberOfYears, int totalStrength) {
+	public Programme(long batchId, String title, int numberOfYears, int totalStrength, String specialization) {
 		super();
 		this.programmeId = batchId;
 		this.title = title;
 		this.numberOfYears = numberOfYears;
 		this.totalStrength = totalStrength;
+		this.specialization = specialization;
 	}
 
-	public long getBatchId() {
+	public long getProgrammeId() {
 		return programmeId;
 	}
 
-	public void setBatchId(long batchId) {
+	public void setProgrammeId(long batchId) {
 		this.programmeId = batchId;
 	}
 
@@ -52,6 +54,14 @@ public class Programme {
 
 	public void setTotalStrength(int totalStrength) {
 		this.totalStrength = totalStrength;
+	}
+
+	public String getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 
 }
