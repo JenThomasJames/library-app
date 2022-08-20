@@ -36,7 +36,7 @@ public class StudentService {
 			System.out.println("************************");
 			System.out.println("\nYour Choice? : ");
 			choice = scan.nextInt();
-			studentMenuSwitch(choice);
+			studentMenuSwitch(choice, scan);
 			System.out.println("Go back to main menu?(Y/N): ");
 			menuChoice = scan.next().charAt(0);
 		} while (menuChoice == 'n' || menuChoice == 'N');
@@ -46,18 +46,29 @@ public class StudentService {
 	 * @Author : Jen Thomas James (2021mt70083) Diverts user's choice to respective
 	 *         methods for student menu
 	 */
-	public void studentMenuSwitch(int choice) {
+	public void studentMenuSwitch(int choice, Scanner scan) {
 		switch (choice) {
 
 		// display all the student's data
 		case 1:
-			System.out.println("Student ID Firstname Lastname");
 			displayAllStudentsData();
+			break;
+
+		// dsiplays the data of the given user ID
+		case 2:
+			int studentId = getStudentId(scan);
+			studentStore.findStudentById(studentId);
 			break;
 
 		default:
 			System.out.println("You made an invalid selection. Please try again!");
 		}
+	}
+
+	private int getStudentId(Scanner scan) {
+		System.out.println("Enter the student ID: ");
+		int studentId = scan.nextInt();
+		return studentId;
 	}
 
 	/**

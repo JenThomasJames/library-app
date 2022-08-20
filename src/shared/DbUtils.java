@@ -7,7 +7,7 @@ public class DbUtils {
 	 *         row
 	 *
 	 */
-	public String[] getColumnFromRow(int numberOfColumns, String row) {
+	public String[] getColumnsFromRow(int numberOfColumns, String row) {
 		String[] columns = new String[numberOfColumns];
 		columns = row.split("::");
 		return columns;
@@ -24,5 +24,17 @@ public class DbUtils {
 		}
 		System.out.println();
 		System.out.println();
+	}
+
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Dertermines whether a row matches the
+	 *         given column ID
+	 *
+	 */
+	public boolean isRowMatchingColumnId(int prefferdId, int currentId) {
+		if (prefferdId == currentId) {
+			return true;
+		}
+		return false;
 	}
 }
