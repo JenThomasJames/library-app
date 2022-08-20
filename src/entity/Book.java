@@ -4,10 +4,6 @@ package entity;
  * @author JEN THOMAS JAMES (2021MT70083)
  *
  */
-/**
- * @author JEN THOMAS JAMES (2021MT70083)
- *
- */
 public class Book {
 	private long bookId;
 	private String title;

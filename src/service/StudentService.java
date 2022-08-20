@@ -85,6 +85,10 @@ public class StudentService {
 		System.out.println("Programme Name: " + columns[3] + "\nCurrent Year: " + columns[4]);
 	}
 
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Gets the student's Id from the user
+	 *
+	 */
 	private int getStudentId(Scanner scan) {
 		System.out.print("Enter the student ID: ");
 		int studentId = scan.nextInt();

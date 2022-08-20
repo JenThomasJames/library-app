@@ -11,6 +11,10 @@ public class BookService {
 	BookStore bookStore = new BookStore();
 	DbUtils dbUtils = new DbUtils();
 
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Displays the menu for managing books
+	 *
+	 */
 	public void bookMenu(Scanner scan) {
 		int choice;
 		char menuChoice = 'n';
@@ -26,6 +30,11 @@ public class BookService {
 		} while (menuChoice == 'n' || menuChoice == 'N');
 	}
 
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Diverts the users choice to respective
+	 *         methods
+	 *
+	 */
 	public void bookMenuSwitch(int choice, Scanner scan) {
 		switch (choice) {
 
@@ -47,6 +56,10 @@ public class BookService {
 		}
 	}
 
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Shows the given book's details
+	 *
+	 */
 	private void showBookDetails(String bookDetails) {
 		String[] columns = dbUtils.getColumnsFromRow(5, bookDetails);
 		System.out.println("\n*******Book Details*******\n");
@@ -54,6 +67,10 @@ public class BookService {
 				+ "\nNumber of Pages: " + columns[3] + "\nBook Type: " + columns[4]);
 	}
 
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Get's the user's choice of book id
+	 *
+	 */
 	private int getBookId(Scanner scan) {
 		System.out.print("Enter the book ID: ");
 		int bookId = scan.nextInt();
