@@ -1,3 +1,2 @@
-StudentID :: First Name :: LastName
 1::Bruce::Wayne
 2::Clark::Kent
