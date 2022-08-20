@@ -1,7 +1,5 @@
 package service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Scanner;
 
 import entity.Student;
@@ -16,6 +14,14 @@ public class StudentService {
 	 */
 	public void addStudent(Student student) {
 		studentStore.addStudent(student);
+	}
+
+	/**
+	 * @Author : Jen Thomas James (2021mt70083) Fetches all details of the student
+	 *         from the memory and displays it to the user.
+	 */
+	private void displayAllStudentsData() {
+		studentStore.getAllStudents();
 	}
 
 	/**
@@ -51,30 +57,6 @@ public class StudentService {
 
 		default:
 			System.out.println("You made an invalid selection. Please try again!");
-		}
-	}
-
-	/**
-	 * @Author : Jen Thomas James (2021mt70083) Fetches all details from the memory
-	 *         and displays it to the user.
-	 */
-	private void displayAllStudentsData() {
-		String filePath = "src/store/studentdb.txt";
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filePath));
-			String currentLine = "";
-			while ((currentLine = reader.readLine()) != null) {
-				String[] column = new String[3];
-				column = currentLine.split("::");
-				for (int i = 0; i < 3; i++) {
-					System.out.print(column[i] + " ");
-				}
-				System.out.println();
-				System.out.println();
-			}
-			reader.close();
-		} catch (Exception ex) {
-			System.out.println("Can't fetch the student details at the moment. Please try again after some time.");
 		}
 	}
 
