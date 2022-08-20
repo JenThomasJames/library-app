@@ -1,2 +1,0 @@
-1::Msc Integrated::60::[Information Systems, Software Systems]
-2::Bachelor of Technology::60::[Computer Science Engineering, Mechanical Engineering, Chemical Engineering, Electrical and Electronics Engineering, Manufacture Engineering]

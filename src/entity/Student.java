@@ -8,16 +8,18 @@ public class Student {
 	private long studentId;
 	private String firstName;
 	private String lastName;
-	private long batchId;
+	private String programme;
+	private int currentYear;
 
 	public Student() {
 	}
 
-	public Student(long studentId, String firstName, String lastName, long batchId) {
+	public Student(long studentId, String firstName, String lastName, String programme, int currentYear) {
 		this.studentId = studentId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.batchId = batchId;
+		this.programme = programme;
+		this.currentYear = currentYear;
 	}
 
 	public long getStudentId() {
@@ -44,12 +46,20 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	public long getBatchId() {
-		return batchId;
+	public String getProgramme() {
+		return programme;
 	}
 
-	public void setBatchId(long batchId) {
-		this.batchId = batchId;
+	public void setProgramme(String programme) {
+		this.programme = programme;
+	}
+
+	public int getCurrentYear() {
+		return this.currentYear;
+	}
+
+	public void setCurrentYear(int currentYear) {
+		this.currentYear = currentYear;
 	}
 
 }

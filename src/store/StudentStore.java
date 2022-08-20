@@ -12,7 +12,7 @@ import shared.DbUtils;
 public class StudentStore {
 
 	String studentDbPath = "src/store/studentdb.txt";
-	int numberOfColumns = 3;
+	int numberOfColumns = 5;
 	DbUtils dbUtils = new DbUtils();
 
 	/**
@@ -22,7 +22,8 @@ public class StudentStore {
 		try {
 			File file = new File(studentDbPath);
 			PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
-			writer.append(student.getStudentId() + "::" + student.getFirstName() + "::" + student.getLastName() + "\n");
+			writer.append(student.getStudentId() + "::" + student.getFirstName() + "::" + student.getLastName() + "::"
+					+ student.getProgramme() + "::" + student.getCurrentYear());
 			writer.close();
 
 		} catch (Exception ex) {
@@ -50,7 +51,7 @@ public class StudentStore {
 	/**
 	 * @author JEN THOMAS JAMES (2021MT70083) Fetches a student by ID from memory
 	 */
-	public void findStudentById(int id) {
+	public String findStudentById(int id) {
 		boolean isFound = false;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(studentDbPath));
@@ -58,10 +59,9 @@ public class StudentStore {
 			while ((row = reader.readLine()) != null) {
 				String[] columns = dbUtils.getColumnsFromRow(id, row);
 				if (dbUtils.isRowMatchingColumnId(id, Integer.parseInt(columns[0]))) {
-					dbUtils.displayAllColumns(numberOfColumns, columns);
 					isFound = true;
 					reader.close();
-					return;
+					return row;
 				}
 			}
 			if (!isFound) {
@@ -69,7 +69,8 @@ public class StudentStore {
 			}
 			reader.close();
 		} catch (Exception ex) {
-			System.out.println("No student with the fiven ID found.");
+			System.out.println("Exception occured while getting student details");
 		}
+		return null;
 	}
 }

@@ -15,7 +15,7 @@ public class DbUtils {
 
 	/**
 	 * @author JEN THOMAS JAMES (2021MT70083) Displays all the data from columns,
-	 *         seperated by commas
+	 *         seperated by a blank space
 	 *
 	 */
 	public void displayAllColumns(int numberOfColumns, String[] columns) {
@@ -31,7 +31,7 @@ public class DbUtils {
 	 *         given column ID
 	 *
 	 */
-	public boolean isRowMatchingColumnId(int prefferdId, int currentId) {
+	public boolean isRowMatchingColumnId(long prefferdId, long currentId) {
 		if (prefferdId == currentId) {
 			return true;
 		}

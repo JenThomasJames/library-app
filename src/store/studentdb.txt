@@ -1,2 +1,2 @@
-1::Bruce::Wayne
-2::Clark::Kent
+1::Bruce::Wayne::Msc Integrated in Software Systems::4
+2::Clark::Kent::Bachelor of Technology in Chemical Engineering::2

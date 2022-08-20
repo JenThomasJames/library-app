@@ -3,11 +3,13 @@ package service;
 import java.util.Scanner;
 
 import entity.Student;
+import shared.DbUtils;
 import store.StudentStore;
 
 public class StudentService {
 
 	StudentStore studentStore = new StudentStore();
+	DbUtils dbUtils = new DbUtils();
 
 	/**
 	 * @author JEN THOMAS JAMES (2021MT70083) Adds a new student to the memory
@@ -32,12 +34,12 @@ public class StudentService {
 		char menuChoice = 'n';
 		do {
 			System.out.println("************************");
-			System.out.println("\n1)All students list" + "\n2)Find student by ID");
+			System.out.println("\n1)Add new student\n2)Display all students\n3)Display Student details by ID\n");
 			System.out.println("************************");
-			System.out.println("\nYour Choice? : ");
+			System.out.print("\nYour Choice? : ");
 			choice = scan.nextInt();
 			studentMenuSwitch(choice, scan);
-			System.out.println("Go back to main menu?(Y/N): ");
+			System.out.print("Go back to main menu?(Y/N): ");
 			menuChoice = scan.next().charAt(0);
 		} while (menuChoice == 'n' || menuChoice == 'N');
 	}
@@ -49,15 +51,22 @@ public class StudentService {
 	public void studentMenuSwitch(int choice, Scanner scan) {
 		switch (choice) {
 
-		// display all the student's data
+		// Adds a new Student
 		case 1:
+			Student student = createStudent(scan);
+			studentStore.addStudent(student);
+			break;
+
+		// display all the student's data
+		case 2:
 			displayAllStudentsData();
 			break;
 
-		// dsiplays the data of the given user ID
-		case 2:
+		// displays the data of the given user ID
+		case 3:
 			int studentId = getStudentId(scan);
-			studentStore.findStudentById(studentId);
+			String studentDetails = studentStore.findStudentById(studentId);
+			showStudentDetails(studentDetails);
 			break;
 
 		default:
@@ -65,8 +74,19 @@ public class StudentService {
 		}
 	}
 
+	/**
+	 * @Author Jen Thomas James(2021mt70083) Displays the student details.
+	 */
+	private void showStudentDetails(String student) {
+		String[] columns = dbUtils.getColumnsFromRow(5, student);
+		System.out.println("\n*******Basic Details*******\n");
+		System.out.println("Student ID: " + columns[0] + "\nName: " + columns[1] + " " + columns[2]);
+		System.out.println("\n*******Programme Details*******\n");
+		System.out.println("Programme Name: " + columns[3] + "\nCurrent Year: " + columns[4]);
+	}
+
 	private int getStudentId(Scanner scan) {
-		System.out.println("Enter the student ID: ");
+		System.out.print("Enter the student ID: ");
 		int studentId = scan.nextInt();
 		return studentId;
 	}
@@ -82,9 +102,12 @@ public class StudentService {
 		String firstName = scan.nextLine();
 		System.out.println("Enter Last Name: ");
 		String lastName = scan.nextLine();
-		System.out.println("Enter Batch ID: ");
-		long batchId = scan.nextLong();
-		Student student = new Student(studentId, firstName, lastName, batchId);
+		System.out.println("Enter Programme Name and Specialization: ");
+		String programme = scan.nextLine();
+		System.out.println("Enter current year: ");
+		int currentYear = scan.nextInt();
+		scan.nextLine();
+		Student student = new Student(studentId, firstName, lastName, programme, currentYear);
 		return student;
 	}
 }
