@@ -53,4 +53,14 @@ public class BookStore {
 		return null;
 	}
 
+	public boolean isBookAvailable(int bookId) {
+		String book = findBookById(bookId);
+		String[] bookDetails = dbUtils.getColumnsFromRow(bookId, book);
+		if (bookDetails[5].equals("true")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

@@ -71,7 +71,7 @@ public class BookService {
 	 * @author JEN THOMAS JAMES (2021MT70083) Get's the user's choice of book id
 	 *
 	 */
-	private int getBookId(Scanner scan) {
+	public int getBookId(Scanner scan) {
 		System.out.print("Enter the book ID: ");
 		int bookId = scan.nextInt();
 		return bookId;

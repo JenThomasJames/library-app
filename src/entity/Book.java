@@ -10,6 +10,7 @@ public class Book {
 	private String author;
 	private int pages;
 	private String bookType;
+	private boolean isAvailable;
 
 	public Book() {
 		super();
@@ -22,6 +23,7 @@ public class Book {
 		this.author = author;
 		this.pages = pages;
 		this.bookType = bookType;
+		this.isAvailable = true;
 	}
 
 	public long getBookId() {
@@ -63,4 +65,13 @@ public class Book {
 	public void setBookType(String bookType) {
 		this.bookType = bookType;
 	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
 }

@@ -4,11 +4,14 @@ import java.util.Scanner;
 
 import entity.Student;
 import shared.DbUtils;
+import store.BorrowStore;
 import store.StudentStore;
 
 public class StudentService {
 
 	StudentStore studentStore = new StudentStore();
+	BookService bookService = new BookService();
+	BorrowStore borrowStore = new BorrowStore();
 	DbUtils dbUtils = new DbUtils();
 
 	/**
@@ -34,7 +37,8 @@ public class StudentService {
 		char menuChoice = 'n';
 		do {
 			System.out.println("************************");
-			System.out.println("\n1)Add new student\n2)Display all students\n3)Display Student details by ID\n");
+			System.out.println(
+					"\n1)Add new student\n2)Display all students\n3)Display Student details by ID\n4) Borrow Book");
 			System.out.println("************************");
 			System.out.print("\nYour Choice? : ");
 			choice = scan.nextInt();
@@ -67,6 +71,13 @@ public class StudentService {
 			int studentId = getStudentId(scan);
 			String studentDetails = studentStore.findStudentById(studentId);
 			showStudentDetails(studentDetails);
+			break;
+
+		// Borrow book
+		case 4:
+			int userId = getStudentId(scan);
+			int bookId = bookService.getBookId(scan);
+			borrowStore.borrowBook(userId, bookId);
 			break;
 
 		default:
