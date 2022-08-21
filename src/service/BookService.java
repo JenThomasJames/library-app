@@ -61,10 +61,17 @@ public class BookService {
 	 *
 	 */
 	private void showBookDetails(String bookDetails) {
+		String bookStatus = "";
 		String[] columns = dbUtils.getColumnsFromRow(5, bookDetails);
+		if (columns[5].equals("true")) {
+			bookStatus = "Available";
+		} else {
+			bookStatus = "Not Available";
+		}
 		System.out.println("\n*******Book Details*******\n");
 		System.out.println("Book ID: " + columns[0] + "\nTitle: " + columns[1] + " " + "\nAuthor: " + columns[2]
-				+ "\nNumber of Pages: " + columns[3] + "\nBook Type: " + columns[4]);
+				+ "\nNumber of Pages: " + columns[3] + "\nBook Type: " + columns[4] + "\nBook Status: " + bookStatus);
+		System.out.println("\n**************************\n");
 	}
 
 	/**
@@ -81,7 +88,7 @@ public class BookService {
 	 * @Author Jen Thomas James Creates a Book object with the collected details
 	 */
 	public Book createBook(Scanner scan) {
-		System.out.println("Pick the book type: \n1) Text Book\n 2) Reference Book");
+		System.out.println("Pick the book type:\n1) Text Book\n2) Reference Book");
 		int bookChoice = scan.nextInt();
 		System.out.println("Enter Book ID: ");
 		int bookId = scan.nextInt();
@@ -98,7 +105,7 @@ public class BookService {
 		} else {
 			bookType = "Reference Book";
 		}
-		Book book = new Book(bookId, title, author, numberOfPages, bookType);
+		Book book = new Book(bookId, title, author, numberOfPages, bookType, true);
 		return book;
 	}
 }

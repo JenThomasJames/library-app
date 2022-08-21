@@ -16,14 +16,14 @@ public class Book {
 		super();
 	}
 
-	public Book(long bookId, String title, String author, int pages, String bookType) {
+	public Book(long bookId, String title, String author, int pages, String bookType, boolean isAvailable) {
 		super();
 		this.bookId = bookId;
 		this.title = title;
 		this.author = author;
 		this.pages = pages;
 		this.bookType = bookType;
-		this.isAvailable = true;
+		this.isAvailable = isAvailable;
 	}
 
 	public long getBookId() {
