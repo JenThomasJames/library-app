@@ -144,10 +144,43 @@ public class BorrowStore {
 	 * @author JEN THOMAS JAMES (2021MT70083) Makes the book available for borrowing
 	 *
 	 */
-	public void returnBook(long userId, long bookId) {
-		// find the user's collection
-		// remove the book from his collection
+	public void returnBook(int studentId, int bookId) {
+		if (isUserPresentInBorrowList(studentId)) {
+			// find the user's collection and remove the book from his collection
+			try {
+				BufferedReader reader = new BufferedReader(new FileReader(borrowDbPath));
+				File file = new File("src/store/borrowTemp.txt");
+				PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
+				String row = "";
+				while ((row = reader.readLine()) != null) {
+					String[] columns = dbUtils.getColumnsFromRow(studentId, row);
+					if (dbUtils.isRowMatchingColumnId(studentId, Integer.parseInt(columns[0]))) {
+						if (columns.length > 2) {
+							writer.append("" + studentId);
+						}
+						for (int i = 1; i < columns.length; i++) {
+							if (Integer.parseInt(columns[i]) != bookId) {
+								writer.append("::" + columns[i] + "\n");
+							}
+						}
+					} else {
+						writer.append(row + "\n");
+					}
+				}
+				writer.close();
+				reader.close();
+				File previousFile = new File(borrowDbPath);
+				previousFile.delete();
+				file.renameTo(previousFile);
+			} catch (Exception ex) {
+				System.out.println("Exception occured while getting borrow details");
+			}
+
+		} else {
+			System.out.println("You don't have any books to return.");
+		}
 		// mark the book as available
+		bookStore.changeBookStatus(bookId, "true");
 	}
 
 	/**

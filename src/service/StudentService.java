@@ -38,7 +38,7 @@ public class StudentService {
 		do {
 			System.out.println("************************");
 			System.out.println(
-					"\n1) Add new student\n2) Display all students\n3) Display Student details by ID\n4) Borrow Book");
+					"\n1) Add new student\n2) Display all students\n3) Display Student details by ID\n4) Borrow Book\n5) Return Book");
 			System.out.println("************************");
 			System.out.print("\nYour Choice? : ");
 			choice = scan.nextInt();
@@ -78,6 +78,13 @@ public class StudentService {
 			int userId = getStudentId(scan);
 			int bookId = bookService.getBookId(scan);
 			borrowStore.borrowBook(userId, bookId);
+			break;
+
+		// Return book
+		case 5:
+			int sid = getStudentId(scan);
+			int bid = bookService.getBookId(scan);
+			borrowStore.returnBook(sid, bid);
 			break;
 
 		default:

@@ -1,6 +1,6 @@
 1::Book1::Author1::565::Text Book::false
-2::Book2::Author2::270::Text Book::false
-3::Book3::Author3::700::Text Book::false
+2::Book2::Author2::270::Text Book::true
+3::Book3::Author3::700::Text Book::true
 4::Book4::Author4::309::Text Book::true
 5::Book5::Author5::565::Text Book::true
 6::Book6::Author6::270::Text Book::true
