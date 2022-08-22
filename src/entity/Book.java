@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
  *
  */
 public class Book {
-	private long bookId;
-	private String title;
-	private String author;
-	private int pages;
+	protected long bookId;
+	protected String title;
+	protected String author;
+	protected int pages;
 	private String bookType;
-	private boolean isAvailable;
-	private LocalDateTime borrowedOn;
+	protected boolean isAvailable;
+	protected LocalDateTime borrowedOn;
 
 	public Book() {
 		super();

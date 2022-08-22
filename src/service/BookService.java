@@ -3,12 +3,14 @@ package service;
 import java.util.Scanner;
 
 import entity.Book;
+import entity.ResearchJournal;
 import shared.DbUtils;
 import store.BookStore;
 
 public class BookService {
 
 	BookStore bookStore = new BookStore();
+	JournalService journalService = new JournalService();
 	DbUtils dbUtils = new DbUtils();
 
 	/**
@@ -20,7 +22,7 @@ public class BookService {
 		char menuChoice = 'n';
 		do {
 			System.out.println("************************");
-			System.out.println("\n1)Add new book\n2)Find book by id");
+			System.out.println("\n1)Add new book\n2)Add new Research Journal\n3)Find book by id");
 			System.out.println("************************");
 			System.out.print("\nYour Choice? : ");
 			choice = scan.nextInt();
@@ -43,9 +45,14 @@ public class BookService {
 			Book book = createBook(scan);
 			bookStore.addBook(book);
 			break;
+		// Adds a new Journal
+		case 2:
+			ResearchJournal journal = journalService.createNewResearchJournal(scan);
+			journalService.addJournal(journal);
+			break;
 
 		// displays the data of the given book id
-		case 2:
+		case 3:
 			int bookId = getBookId(scan);
 			String bookDetails = bookStore.findBookById(bookId);
 			showBookDetails(bookDetails);

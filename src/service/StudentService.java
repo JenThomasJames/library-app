@@ -5,6 +5,7 @@ import java.util.Scanner;
 import entity.Student;
 import shared.DbUtils;
 import store.BorrowStore;
+import store.JournalStore;
 import store.StudentStore;
 
 public class StudentService {
@@ -12,6 +13,8 @@ public class StudentService {
 	StudentStore studentStore = new StudentStore();
 	BookService bookService = new BookService();
 	BorrowStore borrowStore = new BorrowStore();
+	JournalService journalService = new JournalService();
+	JournalStore journalStore = new JournalStore();
 	DbUtils dbUtils = new DbUtils();
 
 	/**
@@ -38,7 +41,7 @@ public class StudentService {
 		do {
 			System.out.println("************************");
 			System.out.println(
-					"\n1) Add new student\n2) Display all students\n3) Display Student details by ID\n4) Borrow Book\n5) Return Book\n6) Renew Book\n7) Reserve Newspaper");
+					"\n1) Add new student\n2) Display all students\n3) Display Student details by ID\n4) Borrow Book\n5) Return Book\n6) Renew Book\n7) Reserve Newspaper\n8) Borrow Journal");
 			System.out.println("************************");
 			System.out.print("\nYour Choice? : ");
 			choice = scan.nextInt();
@@ -98,6 +101,12 @@ public class StudentService {
 		case 7:
 			int id = getStudentId(scan);
 			reserveNewspaper(id);
+			break;
+		// Borrow Journal
+		case 8:
+			int stId = getStudentId(scan);
+			int journalId = journalService.getJournalId(scan);
+			journalStore.borrowJournal(stId, journalId);
 			break;
 
 		default:
