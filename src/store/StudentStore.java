@@ -23,7 +23,8 @@ public class StudentStore {
 			File file = new File(studentDbPath);
 			PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
 			writer.append(student.getStudentId() + "::" + student.getFirstName() + "::" + student.getLastName() + "::"
-					+ student.getProgramme() + "::" + student.getCurrentYear());
+					+ student.getProgramme() + "::" + student.getCurrentYear() + "::"
+					+ student.getReservedNewsPapers());
 			writer.close();
 
 		} catch (Exception ex) {
@@ -72,5 +73,63 @@ public class StudentStore {
 			System.out.println("Exception occured while getting student details");
 		}
 		return null;
+	}
+
+	/**
+	 * @Author Jen Thomas James (2021mt70083) checks if a student can reserve
+	 *         newspaper
+	 */
+	public boolean canReserveNewspaper(int studentId) {
+		boolean canReserve = false;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(studentDbPath));
+			String row = "";
+			while ((row = reader.readLine()) != null) {
+				String[] columns = dbUtils.getColumnsFromRow(studentId, row);
+				if (dbUtils.isRowMatchingColumnId(studentId, Integer.parseInt(columns[0]))) {
+					if (Integer.parseInt(columns[5]) < 2) {
+						canReserve = true;
+						break;
+					} else {
+						canReserve = false;
+						break;
+					}
+				}
+			}
+			reader.close();
+		} catch (Exception ex) {
+			System.out.println("Exception occured while getting borrow details");
+		}
+		return canReserve;
+	}
+
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Method to reserve a newspaper
+	 *
+	 */
+	public void reserveNewspaper(int studentId) {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(studentDbPath));
+			File file = new File("src/store/studentTemp.txt");
+			PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
+			String row = "";
+			while ((row = reader.readLine()) != null) {
+				String[] columns = dbUtils.getColumnsFromRow(studentId, row);
+				if (dbUtils.isRowMatchingColumnId(studentId, Integer.parseInt(columns[0]))) {
+					String updatedRow = columns[0] + "::" + columns[1] + "::" + columns[2] + "::" + columns[3] + "::"
+							+ columns[4] + "::" + (Integer.parseInt(columns[5]) + 1 + "\n");
+					writer.append(updatedRow);
+				} else {
+					writer.append(row + "\n");
+				}
+			}
+			writer.close();
+			reader.close();
+			File previousFile = new File(studentDbPath);
+			previousFile.delete();
+			file.renameTo(previousFile);
+		} catch (Exception ex) {
+			System.out.println("Exception occured while getting borrow details");
+		}
 	}
 }

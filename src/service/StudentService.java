@@ -38,7 +38,7 @@ public class StudentService {
 		do {
 			System.out.println("************************");
 			System.out.println(
-					"\n1) Add new student\n2) Display all students\n3) Display Student details by ID\n4) Borrow Book\n5) Return Book\n6) Renew Book");
+					"\n1) Add new student\n2) Display all students\n3) Display Student details by ID\n4) Borrow Book\n5) Return Book\n6) Renew Book\n7) Reserve Newspaper");
 			System.out.println("************************");
 			System.out.print("\nYour Choice? : ");
 			choice = scan.nextInt();
@@ -86,12 +86,18 @@ public class StudentService {
 			int bid = bookService.getBookId(scan);
 			borrowStore.returnBook(sid, bid);
 			break;
-			
-		//Renew Book
+
+		// Renew Book
 		case 6:
 			int studId = getStudentId(scan);
 			int booId = bookService.getBookId(scan);
 			borrowStore.renewBook(studId, booId);
+			break;
+
+		// Reserve Newspaper
+		case 7:
+			int id = getStudentId(scan);
+			reserveNewspaper(id);
 			break;
 
 		default:
@@ -139,7 +145,19 @@ public class StudentService {
 		System.out.println("Enter current year: ");
 		int currentYear = scan.nextInt();
 		scan.nextLine();
-		Student student = new Student(studentId, firstName, lastName, programme, currentYear, 0.0);
+		Student student = new Student(studentId, firstName, lastName, programme, currentYear, 0);
 		return student;
+	}
+
+	/**
+	 * @Author Jen Thomas James (2021MT70083) checks if a student can reserve
+	 *         newspaper (only 2 at a time)
+	 */
+	public void reserveNewspaper(int studentId) {
+		if (studentStore.canReserveNewspaper(studentId)) {
+			studentStore.reserveNewspaper(studentId);
+		} else {
+			System.out.println("You can't reserve any more newspapers.");
+		}
 	}
 }
