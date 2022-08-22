@@ -97,8 +97,10 @@ public class StudentService {
 	 */
 	private void showStudentDetails(String student) {
 		String[] columns = dbUtils.getColumnsFromRow(5, student);
+		double totalFine = borrowStore.calculateFine(Integer.parseInt(columns[0]));
 		System.out.println("\n*******Basic Details*******\n");
-		System.out.println("Student ID: " + columns[0] + "\nName: " + columns[1] + " " + columns[2]);
+		System.out.println("Student ID: " + columns[0] + "\nName: " + columns[1] + " " + columns[2] + "\nFine Due: Rs "
+				+ totalFine);
 		System.out.println("\n*******Programme Details*******\n");
 		System.out.println("Programme Name: " + columns[3] + "\nCurrent Year: " + columns[4]);
 	}
@@ -114,7 +116,8 @@ public class StudentService {
 	}
 
 	/**
-	 * @Author Jen Thomas James Creates a student object with the collected details
+	 * @Author Jen Thomas James (2021mt70083) Creates a student object with the
+	 *         collected details
 	 */
 	public Student createStudent(Scanner scan) {
 		System.out.println("Enter Student ID: ");
@@ -129,7 +132,7 @@ public class StudentService {
 		System.out.println("Enter current year: ");
 		int currentYear = scan.nextInt();
 		scan.nextLine();
-		Student student = new Student(studentId, firstName, lastName, programme, currentYear);
+		Student student = new Student(studentId, firstName, lastName, programme, currentYear, 0.0);
 		return student;
 	}
 }

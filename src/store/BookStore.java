@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import entity.Book;
 import shared.DbUtils;
@@ -84,7 +86,8 @@ public class BookStore {
 				String[] columns = dbUtils.getColumnsFromRow(bookId, row);
 				if (dbUtils.isRowMatchingColumnId(bookId, Integer.parseInt(columns[0]))) {
 					String updatedRow = columns[0] + "::" + columns[1] + "::" + columns[2] + "::" + columns[3] + "::"
-							+ columns[4] + "::" + status + "\n";
+							+ columns[4] + "::" + status + "::"
+							+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MM yyyy")) + "\n";
 					writer.append(updatedRow);
 				} else {
 					writer.append(row + "\n");

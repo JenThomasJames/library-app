@@ -12,7 +12,7 @@ import shared.DbUtils;
 public class StudentStore {
 
 	String studentDbPath = "src/store/studentdb.txt";
-	int numberOfColumns = 5;
+	int numberOfColumns = 6;
 	DbUtils dbUtils = new DbUtils();
 
 	/**

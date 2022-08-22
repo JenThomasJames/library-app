@@ -1,5 +1,7 @@
 package entity;
 
+import java.time.LocalDateTime;
+
 /**
  * @author JEN THOMAS JAMES (2021MT70083)
  *
@@ -11,9 +13,22 @@ public class Book {
 	private int pages;
 	private String bookType;
 	private boolean isAvailable;
+	private LocalDateTime borrowedOn;
 
 	public Book() {
 		super();
+	}
+
+	public Book(long bookId, String title, String author, int pages, String bookType, boolean isAvailable,
+			LocalDateTime borrowedOn) {
+		super();
+		this.bookId = bookId;
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.bookType = bookType;
+		this.isAvailable = isAvailable;
+		this.borrowedOn = borrowedOn;
 	}
 
 	public Book(long bookId, String title, String author, int pages, String bookType, boolean isAvailable) {
@@ -74,4 +89,11 @@ public class Book {
 		this.isAvailable = isAvailable;
 	}
 
+	public LocalDateTime getBorrowedOn() {
+		return borrowedOn;
+	}
+
+	public void setBorrowedOn(LocalDateTime borrowedOn) {
+		this.borrowedOn = borrowedOn;
+	}
 }

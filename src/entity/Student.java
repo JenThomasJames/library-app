@@ -10,16 +10,19 @@ public class Student {
 	private String lastName;
 	private String programme;
 	private int currentYear;
+	private double totalFine;
 
 	public Student() {
 	}
 
-	public Student(long studentId, String firstName, String lastName, String programme, int currentYear) {
+	public Student(long studentId, String firstName, String lastName, String programme, int currentYear,
+			double totalFine) {
 		this.studentId = studentId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.programme = programme;
 		this.currentYear = currentYear;
+		this.totalFine = totalFine;
 	}
 
 	public long getStudentId() {
@@ -62,4 +65,11 @@ public class Student {
 		this.currentYear = currentYear;
 	}
 
+	public double getTotalFine() {
+		return totalFine;
+	}
+
+	public void setTotalFine(double totalFine) {
+		this.totalFine = totalFine;
+	}
 }

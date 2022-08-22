@@ -5,13 +5,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+import shared.CommonUtils;
 import shared.DbUtils;
 
-/**
- * @author JEN THOMAS JAMES (2021MT70083)
- *
- */
 /**
  * @author JEN THOMAS JAMES (2021MT70083)
  *
@@ -20,6 +20,7 @@ public class BorrowStore {
 	String borrowDbPath = "src/store/borrowdb.txt";
 	BookStore bookStore = new BookStore();
 	StudentStore studentStore = new StudentStore();
+	CommonUtils commonUtils = new CommonUtils();
 	DbUtils dbUtils = new DbUtils();
 
 	/**
@@ -179,7 +180,7 @@ public class BorrowStore {
 		} else {
 			System.out.println("You don't have any books to return.");
 		}
-		// mark the book as available
+		// mark the book as available and reset borrow period for the book
 		bookStore.changeBookStatus(bookId, "true");
 	}
 
@@ -232,6 +233,46 @@ public class BorrowStore {
 		} catch (Exception ex) {
 			System.out.println("Exception occured while getting borrow details");
 		}
+	}
+
+	/**
+	 * @Author Jen Thomas James(2021mt70083) calculates the total fine payable by
+	 *         the student for keeping book without renewal
+	 */
+	public double calculateFine(int studentId) {
+		double totalFine = 0;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(borrowDbPath));
+			String row = "";
+			while ((row = reader.readLine()) != null) {
+				String[] columns = dbUtils.getColumnsFromRow(studentId, row);
+				if (dbUtils.isRowMatchingColumnId(studentId, Integer.parseInt(columns[0]))) {
+					for (int i = 1; i < columns.length; i++) {
+						String book = bookStore.findBookById(Integer.parseInt(columns[i]));
+						String[] bookData = dbUtils.getColumnsFromRow(7, book);
+						String borrowedDateString = bookData[6];
+						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
+						LocalDate borrowedDate = LocalDate.parse(borrowedDateString, dtf);
+						LocalDate today = LocalDate
+								.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MM yyyy")), dtf);
+						long period = today.getDayOfYear() - borrowedDate.getDayOfYear();
+						if (bookData[4].equals("Text Book")) {
+							if (period > 15) {
+								totalFine = totalFine + (period * 5);
+							}
+						} else {
+							if (period > 7) {
+								totalFine = totalFine + (period * 5);
+							}
+						}
+					}
+				}
+			}
+			reader.close();
+		} catch (Exception ex) {
+			System.out.println("Exception occured while getting borrow details");
+		}
+		return totalFine;
 	}
 
 }
