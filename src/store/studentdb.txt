@@ -1,9 +1,9 @@
-1::Bruce::Wayne::Msc Integrated in Software Systems::4
-2::Clark::Kent::Bachelor of Technology in Chemical Engineering::2
-3::Diana::Prince::Msc Integrated in Information Systems::5
-4::Barry::Allen::Msc Integrated in Information Systems::5
-5::Oliver::Queen::Msc Integrated in Information Systems::5
-6::Victor::Stone::Msc Integrated in Information Systems::3
-7::John::Jonnz::Msc Integrated in Information Systems::2
-8::Sheldon::Cooper::Msc Integrated in Information Systems::1
-9::Amy::Fowler::Bachelor of Technology in Chemical Engineering::4
+1::Bruce::Wayne::Msc Integrated in Software Systems::4::0
+2::Clark::Kent::Bachelor of Technology in Chemical Engineering::2::0
+3::Diana::Prince::Msc Integrated in Information Systems::5::0
+4::Barry::Allen::Msc Integrated in Information Systems::5::0
+5::Oliver::Queen::Msc Integrated in Information Systems::5::0
+6::Victor::Stone::Msc Integrated in Information Systems::3::0
+7::John::Jonnz::Msc Integrated in Information Systems::2::0
+8::Sheldon::Cooper::Msc Integrated in Information Systems::1::0
+9::Amy::Fowler::Bachelor of Technology in Chemical Engineering::4::0

@@ -1,4 +1,4 @@
-1::Book1::Author1::565::Text Book::false
+1::Book1::Author1::565::Text Book::false::22 07 2022
 2::Book2::Author2::270::Text Book::true
 3::Book3::Author3::700::Text Book::true
 4::Book4::Author4::309::Text Book::true
@@ -7,7 +7,7 @@
 7::Book7::Author7::700::Text Book::true
 8::Book8::Author8::309::Text Book::true
 9::Book9::Author9::309::Text Book::true
-10::Book10::Author10::565::Reference Book::true
+10::Book10::Author10::565::Reference Book::false::22 08 2022
 11::Book11::Author11::270::Reference Book::true
 12::Book12::Author12::700::Reference Book::true
 13::Book13::Author13::309::Reference Book::true
