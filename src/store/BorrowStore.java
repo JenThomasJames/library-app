@@ -16,6 +16,10 @@ import shared.DbUtils;
  * @author JEN THOMAS JAMES (2021MT70083)
  *
  */
+/**
+ * @author JEN THOMAS JAMES (2021MT70083)
+ *
+ */
 public class BorrowStore {
 	String borrowDbPath = "src/store/borrowdb.txt";
 	BookStore bookStore = new BookStore();
@@ -237,7 +241,7 @@ public class BorrowStore {
 
 	/**
 	 * @Author Jen Thomas James(2021mt70083) calculates the total fine payable by
-	 *         the student for keeping book without renewal
+	 *         the student
 	 */
 	public double calculateFine(int studentId) {
 		double totalFine = 0;
@@ -273,6 +277,29 @@ public class BorrowStore {
 			System.out.println("Exception occured while getting borrow details");
 		}
 		return totalFine;
+	}
+
+	/**
+	 * @Author Jen Thomas James(2021mt70083) Method to return a book
+	 */
+	public void renewBook(int studentId, int bookId) {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(borrowDbPath));
+			String row = "";
+			while ((row = reader.readLine()) != null) {
+				String[] columns = dbUtils.getColumnsFromRow(studentId, row);
+				if (dbUtils.isRowMatchingColumnId(studentId, Integer.parseInt(columns[0]))) {
+					for (int i = 1; i < columns.length; i++) {
+						if (Integer.parseInt(columns[i]) == bookId) {
+							bookStore.renewBook(bookId);
+						}
+					}
+				}
+			}
+			reader.close();
+		} catch (Exception ex) {
+			System.out.println("Exception occured while getting borrow details");
+		}
 	}
 
 }

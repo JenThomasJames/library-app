@@ -103,4 +103,35 @@ public class BookStore {
 		}
 	}
 
+	/**
+	 * @author JEN THOMAS JAMES (2021MT70083) Method to renew a book
+	 *
+	 */
+	public void renewBook(int bookId) {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(bookDbPath));
+			File file = new File("src/store/bookTemp.txt");
+			PrintWriter writer = new PrintWriter(new FileOutputStream(file, true));
+			String row = "";
+			while ((row = reader.readLine()) != null) {
+				String[] columns = dbUtils.getColumnsFromRow(bookId, row);
+				if (dbUtils.isRowMatchingColumnId(bookId, Integer.parseInt(columns[0]))) {
+					String updatedRow = columns[0] + "::" + columns[1] + "::" + columns[2] + "::" + columns[3] + "::"
+							+ columns[4] + "::false::"
+							+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MM yyyy")) + "\n";
+					writer.append(updatedRow);
+				} else {
+					writer.append(row + "\n");
+				}
+			}
+			writer.close();
+			reader.close();
+			File previousFile = new File(bookDbPath);
+			previousFile.delete();
+			file.renameTo(previousFile);
+		} catch (Exception ex) {
+			System.out.println("Exception occured while getting borrow details");
+		}
+	}
+
 }
