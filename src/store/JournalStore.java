@@ -59,6 +59,10 @@ public class JournalStore {
 		}
 	}
 
+	/**
+	 * @Author Jen Thomas James (2021mt70083) Changes the availability of the
+	 *         journal
+	 */
 	private void changeJournalStatus(int journalId, String status) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(journalDbPath));
@@ -86,6 +90,9 @@ public class JournalStore {
 		}
 	}
 
+	/**
+	 * @Author Jen Thomas James (2021mt70083) Lends the journal to the student
+	 */
 	private void addJournalToStudentCollection(int studentId, int journalId) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(journalBorrowDbPath));
@@ -110,6 +117,9 @@ public class JournalStore {
 		}
 	}
 
+	/**
+	 * @Author Jen Thomas James (2021mt70083) Checks if the user can borrow more
+	 */
 	private boolean canStudentBorrowMore(int studentId) {
 		if (isUserPresentInBorrowList(studentId)) {
 			try {
@@ -136,6 +146,10 @@ public class JournalStore {
 		return false;
 	}
 
+	/**
+	 * @Author Jen Thomas James (2021mt70083) Checks if the journal is available to
+	 *         borrow
+	 */
 	private boolean isJournalAvailable(int journalId) {
 		String journal = findJournalById(journalId);
 		String[] bookDetails = dbUtils.getColumnsFromRow(journalId, journal);
@@ -146,6 +160,9 @@ public class JournalStore {
 		}
 	}
 
+	/**
+	 * @Author Jen Thomas James (2021mt70083) Fetches the journal by id from memory
+	 */
 	private String findJournalById(int journalId) {
 		boolean isFound = false;
 		try {
@@ -169,6 +186,10 @@ public class JournalStore {
 		return null;
 	}
 
+	/**
+	 * @Autor Jen Thomas James(2021mt70083) checks if the user is present in borrow
+	 *        list
+	 */
 	public boolean isUserPresentInBorrowList(int userId) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(journalBorrowDbPath));
